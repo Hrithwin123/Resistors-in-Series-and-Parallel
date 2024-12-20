@@ -26,12 +26,26 @@ def circuitPrinter(resistances):
             resrow.append("|"+"\n")
             c-=1
 
-        rowlist.append("|"+"".join(resrow).rjust(max, "-").ljust(max, "-"))
+        rowlist.append("|"+"".join(resrow).rjust(int(max), "-").ljust(max, "-"))
         resrow = ["-----"]
 
     print("".join(rowlist))
     print("|" + ((max - 2) * " ") + "|")
     
+
+def voltagePrinter(resistances, volt):
+    max = 0
+    for row in resistances:
+        if(len(row)> max):
+            max = len(row)
+    max = (max*5) + max * 6 + 5
+    circuitPrinter(resistances)
+    print("|" + ((max - 2) * " ") + "|")
+    print("|" + ((max - 2) * " ") + "|")
+    print("|"+f"({volt})".rjust(int(max/2), "-").ljust(int(max-2), "-") +"|")
+    print("\n")
+    print("\n")
+
 
 for i in range(rows):
     r = []
@@ -57,7 +71,35 @@ for i in sum:
     parmul *= i
     parsum += i
 print("\n")
-print(f"The equivalent resistance is %0.2f Ω" %(parmul/parsum))
+eqres = parmul/parsum
+print(f"The equivalent resistance is %0.2f Ω" %(eqres))
+print("\n")
+
+
+print("Do you want to calculate Current or Potential Difference ?")
+print("1) Current (c)")
+print("2) Voltage (v)")
+user = input()
+user = user.lower()
+if(user == "c" or user == "current" or user == "1"):
+    volt = int(input("Enter the potenital difference (in volts) : "))
+    current = volt / eqres
+    voltagePrinter(resistances, volt)
+    print("\n")
+    print(f"The current flowing through the circuit is %0.2f A" %(current))
+
+elif(user == "v" or user == "voltage" or user == "2"):
+    current = int(input("Enter the current (in amperes) : "))
+    volt = current * eqres
+    voltagePrinter(resistances, int(volt))
+    print(f"The potential difference across the circuit is %0.2f A" %(volt))
+    print("\n")
+else:
+    print("please enter a valid input and try again")
+
+
+
+
 
 
 
