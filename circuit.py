@@ -26,7 +26,7 @@ def circuitPrinter(resistances):
             resrow.append("|"+"\n")
             c-=1
 
-        rowlist.append("|"+"".join(resrow).rjust(int(max), "-").ljust(max, "-"))
+        rowlist.append("|"+"".join(resrow).rjust(max, "-").ljust(max, "-"))
         resrow = ["-----"]
 
     print("".join(rowlist))
